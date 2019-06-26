@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block content %}
+
+      <h3>Result By CEP</h3>
+      <br>
+        <div class="content-section">
+          <li class="list-group-item list-group-item-light"> CEP: {{consultCEP}} | Loca: {{local_name}}</li>
+          <li class="list-group-item list-group-item-light">Latitude: {{lat}}</li>
+          <li class="list-group-item list-group-item-light">Longetude: {{log}}</li>
+        </div>
+       
+        <imsrc="https://seeklogo.com/images/C/correios-2020-logo-D733E75ED9-seeklogo.com.png" alt="some text" width=300 height=200></video>
+
+        <br>
+        <div align="left">
+          <h3>Analyze</h3>
+
+            {% for table in tables %}
+              <li class="list-group-item list-group-item-light">{{ table|safe }}</li>
+            {% endfor %}
+
+          <br>
+
+        <a>Information Taken From The Site </a><a href="http://www.cresesb.cepel.br/index.php?section=sundata"  target="_blank">www.cresesb.cepel.br</a>
+        <br>
+        <br>
+   
+       </div>
+
+         <div align="left">
+          <h4>Dados para Calculo Solar</h4>
+          <br>
+        </div>
+          <form action = "/result2" method = "POST"> 
+        
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-light">
+
+              <p>CEP: <input type = "text" size="12" name = "cep" placeholder=""/>&nbsp</p>
+              <p>NOME DA PROPOSTA): <input type = "text" size="12" name = "prop_name" placeholder=""/>&nbsp</p>
+              <br>
+
+              <p>POTENCIA INSTALADA (KWP): <input type = "text" size="12" name = "kwp" placeholder=""/>&nbsp</p>
+              <p>POTENCIA DAS PLACAS EM W: <input type = "text" size="12" name = "w_" placeholder=""/>&nbsp</p>
+              <p>VALOR DO KWH R$: <input type = "text" size="12" name = "kwh" placeholder=""/>&nbsp</p>
+              <br>
+
+              <p>VALOR  DE EFICIENCIA DO MODULO POR ANO: <input type = "text" size="12" name = "var_efic_ano" placeholder=""/>&nbsp</p>
+              <p>% TX DE APLICAÇÃO CDI ANUAL: <input type = "text" size="12" name = "tx" placeholder=""/>&nbsp</p>
+              <p>% INFLAÇÃO ENERGETICA MÉDIA: <input type = "text" size="12" name = "inf_eneg" placeholder=""/>&nbsp</p>
+              <p>CUSTO DO SISTEMA (KIT): <input type = "text" size="12" name = "kit" placeholder=""/>&nbsp</p>
+              <p>FRETE: <input type = "text" size="12" name = "frete" placeholder=""/>&nbsp</p>
+              <p>VALOR DO PROJETO: <input type = "text" size="12" name = "var_proj" placeholder=""/>&nbsp</p>
+              <p>VALOR DA INSTALAÇÃO: <input type = "text" size="12" name = "var_inst" placeholder=""/>&nbsp</p>
+
+            </li>
+          </ul>
+            <br>
+            <br>
+                 <input type=image src="http://www.colegioequipe.com.br/leopoldina/wp-content/uploads/sites/6/yellow-play-button-icon-24552.png" alt="some text" width=60 height=60height="15">
+      </form>
+      <br>
+      <br>
+
+        <br>
+      </div>
+
+
+       <br> 
+      <br>
+
+      <p><a href="/teladados"><img src="https://www.tcionline.com.br/secure/hapvida/images/voltar.png" alt="some text" width=100 height=100></a></p>
+
+      <br>
+      <br>
+
+{% endblock content %}

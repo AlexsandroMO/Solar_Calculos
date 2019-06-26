@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h4>Dados para Cálculo</h4>
+  <br>
+  <img src="https://assets.b9.com.br/wp-content/uploads/2014/05/MarcaECT_480.jpg" alt="some text" width=200 height=120>
+  
+<br>
+  <div align="left">
+    <h4>CEP Search</h4>
+    <br>
+  </div>
+      <form action = "/result" method = "POST"> 
+        
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-light">
+              <p>Tipe The CEP: <input type = "text" size="12" name = "cep" placeholder="12345678"/>&nbsp</p>
+            </li>
+          </ul>
+            <br>
+            <br>
+                 <input type=image src="http://www.colegioequipe.com.br/leopoldina/wp-content/uploads/sites/6/yellow-play-button-icon-24552.png" alt="some text" width=60 height=60height="15">
+      </form>
+      <br>
+      <br>
+
+        <br>
+      </div>
+
+
+{% endblock content %}

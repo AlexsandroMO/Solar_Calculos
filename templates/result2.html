@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div align="left">
+      <h3>Calculos Executados</h3>
+</div>
+        <imsrc="https://seeklogo.com/images/C/correios-2020-logo-D733E75ED9-seeklogo.com.png" alt="some text" width=300 height=200></video>
+
+        <br>
+
+
+          <br>
+          <p>P_Base1</p>
+            {% for table in tables2 %}
+              <li class="list-group-item list-group-item-light">{{ table|safe }}</li>
+            {% endfor %}
+
+          <br>
+
+          <p>P_Base2</p>
+
+            {% for table in tables3 %}
+              <li class="list-group-item list-group-item-light">{{ table|safe }}</li>
+            {% endfor %}
+
+          <br>
+
+          <p>rs_p</p>
+
+            {% for table in tables4 %}
+              <li class="list-group-item list-group-item-light">{{ table|safe }}</li>
+            {% endfor %}
+
+          <br>
+
+          <p>Gera_Econ</p>
+
+            {% for table in tables1 %}
+              <li class="list-group-item list-group-item-light">{{ table|safe }}</li>
+            {% endfor %}
+
+          <br>
+
+          <p>Ano_Saldo</p>
+
+            {% for table in tables %}
+              <li class="list-group-item list-group-item-light">{{ table|safe }}</li>
+            {% endfor %}
+
+          <br>
+        <a>Information Taken From The Site </a><a href="http://www.cresesb.cepel.br/index.php?section=sundata"  target="_blank">www.cresesb.cepel.br</a>
+        <br>
+        <br>
+
+       <br>
+      <br>
+
+      <p><a href="/teladados"><img src="https://www.tcionline.com.br/secure/hapvida/images/voltar.png" alt="some text" width=100 height=100></a></p>
+
+      <br>
+      <br>
+
+{% endblock content %}
