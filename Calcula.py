@@ -257,7 +257,7 @@ def consultlog_lat(cep):
 #===========================
 
 
-def calcula_DataFrame(cep, prop_name, kwp, w_, kwh, var_efic_ano, tx, inf_eneg, kit, frete, var_proj, var_inst):
+def calcula_DataFrame(cep, prop_name, w_, kwh, var_efic_ano, tx, inf_eneg, kit, frete, var_proj, var_inst, jan, fev, mar, abr, mai, jun, jul, ago, setb, out, nov, dez):
 
   #Ler Planilhas
   df_Ano_Saldo = pd.read_csv('DATA_FRAME/df_Ano_Saldo.csv')
@@ -265,6 +265,7 @@ def calcula_DataFrame(cep, prop_name, kwp, w_, kwh, var_efic_ano, tx, inf_eneg, 
   df_P_Base1 = pd.read_csv('DATA_FRAME/df_P_Base1.csv')
   df_P_Base2 = pd.read_csv('DATA_FRAME/df_P_Base2.csv')
   df_rs_p = pd.read_csv('DATA_FRAME/df_rs_p.csv')
+  df_WT = pd.read_csv('DATA_FRAME/df_WT.csv')
   ##df_TMS = pd.read_csv('DATA_FRAME/df_TMS.csv')
 
   #Atualiza tabela vinda do cresesb
@@ -280,10 +281,33 @@ def calcula_DataFrame(cep, prop_name, kwp, w_, kwh, var_efic_ano, tx, inf_eneg, 
     Solar_table = float(new_tab[0] + '.' + new_tab[1])
     table_Solar[0].loc[0][a] = Solar_table
 
+  global tab_media
+
+  tab_media = 0
+  for a in table_Solar[0]['Média']:
+    tab_media = a
+
+  df_WT['K_MES'][0] = jan
+  df_WT['K_MES'][1] = fev
+  df_WT['K_MES'][2] = mar
+  df_WT['K_MES'][3] = abr
+  df_WT['K_MES'][4] = mai
+  df_WT['K_MES'][5] = jun
+  df_WT['K_MES'][6] = jul
+  df_WT['K_MES'][7] = ago
+  df_WT['K_MES'][8] = setb
+  df_WT['K_MES'][9] = out
+  df_WT['K_MES'][10] = nov
+  df_WT['K_MES'][11] = dez
+  df_WT['K_MES'][12] = (df_WT['K_MES'][0:12].sum()/12)
+
   ###P_Base1
 
+  df_rs_p['KWH_GERADO'].loc[14] = 0.85
+  media_cons = df_WT['K_MES'][12]
+
   df_P_Base1['B'].loc[0] = local_name
-  df_P_Base1['B'].loc[1] = kwp
+  df_P_Base1['B'].loc[1] = ((((media_cons * 1000) / 30) / tab_media) / df_rs_p['KWH_GERADO'].loc[14])
   df_P_Base1['B'].loc[2] = w_
   df_P_Base1['B'].loc[3] = kwh
   df_P_Base1['B'].loc[4] = round(((df_P_Base1['B'].loc[1] * 1000) / df_P_Base1['B'].loc[2]),2)
