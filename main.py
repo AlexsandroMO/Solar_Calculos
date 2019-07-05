@@ -1,6 +1,7 @@
-from flask import Flask, render_template, url_for, request,send_from_directory
+from flask import Flask, render_template, url_for, request,send_from_directory, redirect
 import Calcula
 import db
+import os
 #===================================================================
 
 app = Flask(__name__)
@@ -79,10 +80,25 @@ def result2():
     result_calc = request.form
     print(result_calc)
 
+    jan = float(result_calc['jan'])
+    fev = float(result_calc['fev'])
+    mar = float(result_calc['mar'])
+    abr = float(result_calc['abr'])
+    mai = float(result_calc['mai'])
+    jun = float(result_calc['jun'])
+    jul = float(result_calc['jul'])
+    ago = float(result_calc['ago'])
+    setb = float(result_calc['setb'])
+    out = float(result_calc['out'])
+    nov = float(result_calc['nov'])
+    dez = float(result_calc['dez'])
+
+
     cep = result_calc['cep']
     prop_name = result_calc['prop_name']
 
-    kwp = float(result_calc['kwp'])
+    #wpi = float(result_calc['wpi'])
+    #kwp = float(result_calc['kwp'])
     w_ = float(result_calc['w_'])
     kwh = float(result_calc['kwh'])
 
@@ -94,10 +110,13 @@ def result2():
     var_proj = float(result_calc['var_proj'])
     var_inst = float(result_calc['var_inst'])
 
+    
+    print(jan, ' - ', fev, ' - ',mar, ' - ',abr, ' - ',mai, ' - ',jun, ' - ',jul, ' - ',ago, ' - ',setb, ' - ',out, ' - ',nov, ' - ', dez)
+    
     print(cep)
     print(prop_name)
 
-    print(kwp)
+    #print(kwp)
     print(w_)
     print(kwh)
     print(var_efic_ano)
@@ -108,7 +127,7 @@ def result2():
     print(var_proj)
     print(var_inst)
 
-    chama_dfinal = Calcula.calcula_DataFrame(cep, prop_name, kwp, w_, kwh, var_efic_ano, tx, inf_eneg, kit, frete, var_proj, var_inst)
+    chama_dfinal = Calcula.calcula_DataFrame(cep, prop_name, w_, kwh, var_efic_ano, tx, inf_eneg, kit, frete, var_proj, var_inst, jan, fev, mar, abr, mai, jun, jul, ago, setb, out, nov, dez)
 
     Ano_Saldo = chama_dfinal[0]
     Gera_Econ = chama_dfinal[1]
@@ -124,7 +143,21 @@ def result2():
     print(rs_p)
     #print(TMS)
 
-    return render_template("result2.html", tables=[Ano_Saldo.to_html(classes='data')], titles=Ano_Saldo.columns.values, tables1=[Gera_Econ.to_html(classes='data')], titles1=Gera_Econ.columns.values, tables2=[P_Base1.to_html(classes='data')], titles2=P_Base1.columns.values, tables3=[P_Base2.to_html(classes='data')], titles3=P_Base2.columns.values, tables4=[rs_p.to_html(classes='data')], titles4=rs_p.columns.values)
+    return render_template("result2.html", tables2=[P_Base1.to_html(classes='data')], titles2=P_Base1.columns.values, tables3=[P_Base2.to_html(classes='data')], titles3=P_Base2.columns.values)
+
+@app.route("/fileform")
+def fileFrontPage():
+  return render_template('fileform.html')
+
+@app.route("/handleUpload", methods=['POST'])
+def handleFileUpload():
+  if 'photo' in request.files:
+    photo = request.files['photo']
+    if photo.filename != '':
+      print('foi')            
+      photo.save(os.path.join('UPLOAD/', photo.filename))
+  return redirect(url_for('home'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+  #app.run(host='0.0.0.0', port=8080, debug=True)
+  app.run(debug=True)
